@@ -5,7 +5,21 @@
     $gestor= new GestorEntidad();
 
     for ($i=1; $i<=50; $i++) { 
-        $producto = new Producto($i, "producto$i", $i *10);
+        if ($i % 2 == 0) {
+            if ($i % 4 == 0) {
+                $producto= new Electronico($i, "producto$i", $i * 20, "Samsung");
+            } else{
+                $producto= new Electronico($i, "producto$i", $i * 20, "LG");
+            }
+            
+        } else{
+
+            $fecha= date( "d-m-Y", rand(strtotime("2026-01-01"), strtotime("2028-01-01")));
+
+            $producto= new Alimento($i, "producto$i", $i * 5, $fecha);
+            
+        }
+
         $gestor->crearObjeto($producto);
     }
 
@@ -13,7 +27,7 @@
     $gestor->actObj(40, "nuevoProd40", 80);
 
     $gestor->elimObj(1);
-    $gestor->elimObj(50);
+    $gestor->elimObj(20);
 
     $productos= $gestor->leerObj();
 
@@ -31,6 +45,8 @@
         <th>ID</th>
         <th>Nombre</th>
         <th>Precio</th>
+        <th>Fabricante</th>
+        <th>Caducidad</th>
     </tr>
 
     <?php foreach ($productos as $p): ?>
@@ -38,6 +54,8 @@
         <td><?= $p->getId() ?></td>
         <td><?= $p->getNombre() ?></td>
         <td><?= $p->getPrecio() ?></td>
+        <td><?= ($p instanceof Electronico) ? $p->getFabricante() : 'X' ?></td>
+        <td><?= ($p instanceof Alimento) ? $p->getCaducidad() : 'X' ?></td>
     </tr>
     <?php endforeach; ?>
 </table>

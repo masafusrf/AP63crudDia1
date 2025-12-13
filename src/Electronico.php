@@ -2,8 +2,15 @@
 
     class Electronico extends Producto{
 
-        function __construct($cod, $name, $price){
-            parent::__construct($cod, $name, $price)
+        private $fabricante;
+
+        public function getFabricante(){
+            return $this->fabricante;
+        }
+
+        function __construct($cod, $name, $price, $fabricante){
+            $this->fabricante=$fabricante;
+            parent::__construct($cod, $name, $price);
         }
     }
 
