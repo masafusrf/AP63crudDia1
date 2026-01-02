@@ -32,10 +32,22 @@
     // $gestor->actObj(20, "nuevoProd20", 70);
     // $gestor->actObj(40, "nuevoProd40", 80);
 
-    $gestor->elimObj(1);
-    $gestor->elimObj(20);
+    // $gestor->elimObj(1);
+    // $gestor->elimObj(20);
 
-    $productos= $gestor->leerObj();
+    // $productos= $gestor->leerObj();
+
+    if ($accion === 'eliminar') {
+        
+        $id = $_GET['id'] ?? null;
+
+        if ($id !== null) {
+            $gestor->elimObj($id);
+        }
+
+        header("Location: index.php");
+        exit();
+    }
 
 ?>
 
@@ -98,9 +110,12 @@
                     <input type="date" name="caducidad" value="<?= $p->getCaducidad() ?>">
                 <?php endif; ?>
 
-                <button type="submit">Guardar</button>    
+                <button type="submit">Modificar</button>    
             <!-- recogemos por POST los datos para modificar (podemos poner datos por defecto) -->
             </form>
+
+            <!-- Botón Eliminar -->
+            <a href="index.php?accion=eliminar&id=<?= $p->getId() ?>">Eliminar</a> <!-- Recogemos por GET el id -->
 
         </td>
     </tr>
