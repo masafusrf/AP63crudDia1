@@ -29,14 +29,6 @@
         exit();   
     }
 
-    // $gestor->actObj(20, "nuevoProd20", 70);
-    // $gestor->actObj(40, "nuevoProd40", 80);
-
-    // $gestor->elimObj(1);
-    // $gestor->elimObj(20);
-
-    // $productos= $gestor->leerObj();
-
     if ($accion === 'eliminar') {
         
         $id = $_GET['id'] ?? null;
