@@ -1,20 +1,14 @@
 <?php
 
-    spl_autoload_register(function ($clase) {
-        
+    spl_autoload_register(function ($class) {
+        $paths = ['models/', 'controllers/'];
 
-         $rutas = [
-        "controllers/$clase.php",
-        "models/$clase.php"
-    ];
-
-    foreach ($rutas as $ruta) {
-        $archivo = __DIR__ . "/" . $ruta;
-        if (file_exists($archivo)) {
-            require $archivo;
-            return;
+        foreach ($paths as $path) {
+            $file = __DIR__ . '/' . $path . $class . '.php';
+            if (file_exists($file)) {
+                require_once $file;
+                return;
+            }
         }
-    }
     });
-
 ?>
